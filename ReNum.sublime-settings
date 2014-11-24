@@ -1,4 +1,8 @@
 {
 	// start number from this number
-	"start_index": 0
+	"start_index": 0,
+
+	// pattern to search
+	// NOTE: regex is used AS IS (after escaping)
+	"search_pattern": "/\\*\\d+\\*/"
 }

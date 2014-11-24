@@ -6,18 +6,19 @@ class renum(sublime_plugin.TextCommand):
     def run(self, edit):
         settings = sublime.load_settings('ReNum.sublime-settings')
 
-        start_pos = 0
         index = settings.get("start_index", 0)
-        pattern = '/\*\d+\*/'
+        pattern = settings.get("search_pattern", '/\*\d+\*/')
 
         # get all matches...
         num = len(self.view.find_all(pattern))
         if not num:
+            sublime.status_message("Nothing found for `{}`".format(pattern))
             return
         # ... to keep leading zeros
         fmt = "/*{}:0>{}{}*/".format('{', len(str(num - 1)), '}')
         # ^ I don't know how to use {} not as special characters
 
+        start_pos = 0
         while True:
             matched_region = self.view.find(pattern, start_pos)
             if not matched_region:
