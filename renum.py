@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
+
 import sublime, sublime_plugin
 
 class renum(sublime_plugin.TextCommand):
     def run(self, edit):
+        settings = sublime.load_settings('ReNum.sublime-settings')
+
         start_pos = 0
-        index = 0
+        index = settings.get("start_index", 0)
         pattern = '/\*\d+\*/'
 
         # get all matches...
